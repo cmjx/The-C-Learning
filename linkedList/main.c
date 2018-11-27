@@ -53,8 +53,23 @@ int main(int argc, char *argv[]) {
 	if(!isFound){
 		printf("没找到！\n");
 	}
-	
-		
+	//链表的删除
+	scanf("%d",&number);	 
+	Node* q;
+	for(q=NULL,p=list.head; p; q=p,p=p->next){
+		if(p->value==number){
+			if(q)//Be careful boundary
+			{
+				q->next = p->next;
+			}
+			else{
+				list.head = p->next;
+			}
+			free(p);
+			break;
+		}
+	}
+	print(&list);//验证链表节点是否删除了 
 	return 0;
 }
 
