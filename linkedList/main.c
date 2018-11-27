@@ -1,3 +1,4 @@
+//±àÒëÆ÷Ãû: TDM-GCC 4.8.1 32-bit Debug
 #include "node.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,29 +8,29 @@
 //	struct _node *next;
 //} Node;
 
-Node* add(Node* head,int number);
+Node* add(Node** pHead,int number);
 
 int main(int argc, char *argv[]) {
-	Node * head = NULL;
+	Node* head = NULL;
 	int number;
 	do{
 		scanf("%d",&number);
 		if(number != -1){
-			head = add(head,number);//ÕâÑùĞ´ÎŞ·¨·À´ô£¬ÎŞ·¨Ç¿ÆÈµ÷ÓÃÕß±ØĞë×öÖ¸Õë¸³Öµ£¬
-		}						    //Èç¹ûÊ¹ÓÃº¯ÊıµÄÈËÍüÁË×ö¸³Öµ£¬¶ÔmainÀïµÄ¿ÕÁ´±íadd¾ÍÊÇ´íµÄ¡£ 
+			head = add(&head,number);//´«ÈëheadÖ¸Õë±äÁ¿µÄµØÖ·£¬ÕâÑùµ÷ÓÃÕß¸³Öµ²»¸³Öµ¶¼Ã»¹ØÏµÁË¡£ 
+		}						     
 	} while(number != -1);
 	
 	return 0;
 }
 
-Node* add(Node* head,int number)//CµÄº¯Êıµ÷ÓÃÓÀÔ¶¶¼ÊÇ´«Öµ£¬»òÕßËµ¿½±´Öµ¡£ËùÒÔ±ØĞë½«½á¹ûreturn»ØÈ¥ 
-{								//void add(Node* head,int number);ÊÇÎŞĞ§µÄ¡£ 
+Node* add(Node** pHead,int number)//´«ÈëµÄÊÇÖ¸Õë±äÁ¿µÄµØÖ·¡£ 
+{							      //ÕâÑù¶Ô*pHead²Ù×÷¾ÍÄÜ²Ù×÷Íâ²¿Ö¸Õë±äÁ¿ 
 		// add to linked-list
 		Node *p = (Node*)malloc(sizeof(Node));
 		p->value = number;
 		p->next = NULL;
 		//find the last
-		Node *last = head;
+		Node *last = *pHead;
 		if(last){
 			while(last->next){
 				last = last->next;
@@ -38,7 +39,7 @@ Node* add(Node* head,int number)//CµÄº¯Êıµ÷ÓÃÓÀÔ¶¶¼ÊÇ´«Öµ£¬»òÕßËµ¿½±´Öµ¡£ËùÒÔ±ØĞ
 			last->next = p;
 		}
 		else{
-			head = p;
+			*pHead = p;
 		}
-		return head;
+		return *pHead;//ÊÇ·ñreturnÒÑ¾­Ã»¹ØÏµÁË¡£ 
 }
